@@ -1,6 +1,6 @@
 # cifar10-ai-project
 testing for AI
-this repositorty is for my notes and personal use, this is only public for employers and such
+this repositorty is for my notes and personal use, 
 
 https://www.cs.toronto.edu/~kriz/cifar.html
 https://aman.ai/primers/ai/top-30-papers/
