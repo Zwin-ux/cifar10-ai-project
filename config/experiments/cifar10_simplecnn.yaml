@@ -1,0 +1,19 @@
+# Sample experiment configuration for SimpleCNN on CIFAR-10
+model: 'simplecnn'
+dataset: 'cifar10'
+
+epochs: 2 # Example, can be overridden by CLI
+batch_size: 64
+lr: 0.001
+
+# Dataset specific
+val_split: 0.1
+num_workers: 2
+
+# Trainer specific
+patience: 7
+
+# Logging and Saving
+save_path: 'artifacts/cifar10_simplecnn_from_config_best.pth'
+plot_curves: True
+use_cuda: True

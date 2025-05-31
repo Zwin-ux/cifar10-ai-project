@@ -1,0 +1,19 @@
+# Experiment configuration for BERT on SST-2
+model_name: 'bert-base-uncased' # Specific to the NLP model loader
+model_type: 'bert_classifier' # General model type for train.py
+dataset_name: 'sst2' # Specific to the NLP dataset loader
+dataset_type: 'nlp' # General dataset type for train.py
+
+epochs: 1 # For quick testing
+batch_size: 16 # Smaller batch for BERT
+lr: 2e-5 # Common learning rate for fine-tuning BERT
+
+# Tokenizer/Dataset specific
+max_length: 128
+num_labels: 2 # SST-2 is binary classification
+
+# Logging and Saving
+save_path: 'artifacts/sst2_bert_best.pth'
+plot_curves: False # Plotting for NLP might need different handling or library
+use_cuda: True
+num_workers: 0 # Often 0 for Hugging Face map/tokenize unless specific setup
