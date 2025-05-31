@@ -6,6 +6,7 @@ import torchvision
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
+import json
 
 if __name__ == "__main__":
     # Step 1: Load CIFAR-10 dataset
@@ -65,6 +66,7 @@ if __name__ == "__main__":
     epochs_no_improve = 0
     train_losses, val_losses = [], []
     train_accs, val_accs = [], []
+    training_history = []
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=15, gamma=0.5)
     best_model_state = None
 
@@ -106,6 +108,16 @@ if __name__ == "__main__":
         val_accs.append(val_acc)
         scheduler.step()
 
+        # Store history
+        history_epoch = {
+            "epoch": epoch + 1,
+            "train_loss": train_loss,
+            "val_loss": val_loss,
+            "train_acc": train_acc,
+            "val_acc": val_acc
+        }
+        training_history.append(history_epoch)
+
         print(f"Epoch {epoch+1}: Train Loss={train_loss:.3f}, Train Acc={train_acc:.3f}, Val Loss={val_loss:.3f}, Val Acc={val_acc:.3f}")
 
         # Early stopping
@@ -122,6 +134,10 @@ if __name__ == "__main__":
 
     print('Finished Training')
     print(f'Best Val Accuracy: {best_val_acc*100:.2f}%')
+
+    # Save training history
+    with open('training_history.json', 'w') as f:
+        json.dump(training_history, f, indent=4)
 
     # Step 5: Test the Model on Test Data (with best model)
     net.load_state_dict(torch.load('cifar10_best_model.pth'))
@@ -145,6 +161,7 @@ if __name__ == "__main__":
     plt.ylabel('Loss')
     plt.legend()
     plt.title('Loss Curves')
+    plt.savefig('loss_plot.png')  # Save loss plot
     plt.subplot(1,2,2)
     plt.plot(train_accs, label='Train Acc')
     plt.plot(val_accs, label='Val Acc')
@@ -152,5 +169,5 @@ if __name__ == "__main__":
     plt.ylabel('Accuracy')
     plt.legend()
     plt.title('Accuracy Curves')
+    plt.savefig('accuracy_plot.png')  # Save accuracy plot
     plt.tight_layout()
-    plt.show()
