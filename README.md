@@ -23,6 +23,8 @@ pip install -r requirements.txt
 ```bash
 python cifar10_train.py
 ```
+<img width="1913" height="1173" alt="image" src="https://github.com/user-attachments/assets/1bc42924-08a7-499c-8b2e-08d62cb82f9d" />
+
 
 This downloads CIFAR-10 to `./data/` and saves the best model to `cifar10_best_model.pth`.
 
