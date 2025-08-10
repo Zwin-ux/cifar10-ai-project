@@ -8,7 +8,7 @@ from cifar10_model import Net, load_trained_model
 
 CLASSES = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
-model = load_trained_model('cifar10_model.pth')
+model = load_trained_model('cifar10_best_model.pth')
 transform = transforms.Compose([
     transforms.Resize((32, 32)),
     transforms.ToTensor(),
@@ -47,7 +47,7 @@ def display_image(img):
     panel.image = img_tk
 
 root = tk.Tk()
-root.title('CIFAR-10 AI Tester (Tkinter)')
+root.title('CIFAR-10 Image Classifier')
 
 panel = tk.Label(root)
 panel.pack(pady=10)

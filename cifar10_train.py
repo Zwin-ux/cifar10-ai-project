@@ -153,4 +153,12 @@ if __name__ == "__main__":
     plt.legend()
     plt.title('Accuracy Curves')
     plt.tight_layout()
+    # Save curves image for GitHub Pages docs
+    try:
+        import os
+        os.makedirs('docs/assets', exist_ok=True)
+        plt.savefig('docs/assets/training_curves.png', dpi=150)
+        print('Saved training curves to docs/assets/training_curves.png')
+    except Exception as e:
+        print(f'Warning: could not save training curves image: {e}')
     plt.show()

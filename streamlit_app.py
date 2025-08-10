@@ -9,7 +9,11 @@ CLASSES = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'hors
 
 @st.cache_resource
 def get_model():
-    return load_trained_model('cifar10_model.pth')
+    try:
+        return load_trained_model('cifar10_best_model.pth')
+    except FileNotFoundError:
+        st.error("Model weights not found: 'cifar10_best_model.pth'. Please run training first: `python cifar10_train.py`.")
+        st.stop()
 
 @st.cache_data
 def get_transform():
@@ -27,7 +31,8 @@ def predict_image(img, model, transform):
         pred_idx = np.argmax(probs)
     return CLASSES[pred_idx], probs[pred_idx], probs
 
-st.title('CIFAR-10 AI Tester')
+st.set_page_config(page_title='CIFAR-10 Classifier', layout='centered')
+st.title('CIFAR-10 Image Classifier')
 
 model = get_model()
 transform = get_transform()
